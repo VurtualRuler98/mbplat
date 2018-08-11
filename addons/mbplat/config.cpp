@@ -282,7 +282,6 @@ class CfgVehicles {
 			Dragged3DEN = "_this call mbplat_fnc_compMove";				
 			RegisteredToWorld3DEN = "_this call mbplat_fnc_compInit";
 			UnregisteredFromWorld3DEN = "_this call mbplat_fnc_compDelete";
-			killed = "_this call mbplat_fnc_compDelete";
 		};
 	};
 	class Land_MB_Composition_1: Land_MB_Composition_base {

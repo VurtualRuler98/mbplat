@@ -48,8 +48,8 @@ _dir = getdir _plat;
 _plat setVariable ["mbplat_parts", _platParts];
 if !(is3DEN) then {
 	_pos = getPosASL _plat;
-	[_plat,_pos] spawn {
-		params ["_plat","_pos"];
+	[_plat,_pos,_platParts] spawn {
+		params ["_plat","_pos","_platParts"];
 		while {alive _plat} do {
 		sleep 0.5;
 		if ((getPosASL _plat distance _pos)>1) then {
@@ -57,6 +57,15 @@ if !(is3DEN) then {
 			_pos = getPosASL _plat;
 			};
 		};
+		waitUntil {!alive _plat};
+		{
+			_part = _x select 0;
+			_path = _x select 3;
+			deleteVehicle _part;
+			if (!isNull _path) then {
+				deleteVehicle _path;
+			};
+		} forEach _platParts;
 	};
 };
 true
