@@ -1,0 +1,5 @@
+tga/*.tga
+addons/a3/*
+*.blend1
+ignore_*.blend
+blend_mb/*
