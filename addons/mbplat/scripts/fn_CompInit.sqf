@@ -18,7 +18,7 @@ Copyright 2018 vurtual
 
 // _plat		Platform base object.
 _plat = param [0,objNull,[objNull]];
-if (!isServer) exitWith {};
+if ((isNull _plat) || !(local _plat)) exitWith {false};
 
 _platParts = [];
 _partList = (configFile >> "CfgVehicles" >> typeOf _plat >> "mbplatParts") call BIS_fnc_getCfgDataArray;
@@ -46,4 +46,17 @@ _dir = getdir _plat;
 
 } forEach _partList;
 _plat setVariable ["mbplat_parts", _platParts];
+if !(is3DEN) then {
+	_pos = getPosASL _plat;
+	[_plat,_pos] spawn {
+		params ["_plat","_pos"];
+		while {alive _plat} do {
+		sleep 0.5;
+		if ((getPosASL _plat distance _pos)>1) then {
+			[_plat] call mbplat_fnc_compMove;
+			_pos = getPosASL _plat;
+			};
+		};
+	};
+};
 true

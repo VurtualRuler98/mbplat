@@ -18,8 +18,7 @@ Copyright 2018 vurtual
 
 // _plat		Platform base object.
 _plat = param [0,objNull,[objNull]];
-if (!isServer) exitWith {};
-if (isNull _plat) exitWith {["No platform object provided!"] call bis_fnc_error; false};
+if ((isNull _plat) || !(local _plat)) exitWith {false};
 
 _platParts = _plat getVariable ["mbplat_parts", []];
 
